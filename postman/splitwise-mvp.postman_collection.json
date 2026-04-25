@@ -1,0 +1,97 @@
+{
+  "info": {
+    "name": "Splitwise MVP",
+    "description": "Postman collection for Splitwise-like MVP backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "userId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"alice@example.com\",\n  \"password\": \"StrongPass123\",\n  \"defaultCurrency\": \"INR\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Expense",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "x-user-id",
+            "value": "{{userId}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dinner\",\n  \"value\": \"120.00\",\n  \"currency\": \"INR\",\n  \"members\": [1, 2, 3],\n  \"paidByUserId\": 1,\n  \"date\": \"2026-04-26\",\n  \"notes\": \"Friday dinner\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/expenses",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "expenses"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Balances",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-user-id",
+            "value": "{{userId}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/balances",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "balances"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
